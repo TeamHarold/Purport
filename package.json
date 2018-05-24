@@ -1,0 +1,12 @@
+{
+  "name": "purport",
+  "version": "1.0.0",
+  "description": "lite NodeJS import mocking for tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "Sample": "./sample.js"
+}
