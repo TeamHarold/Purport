@@ -7,19 +7,31 @@ module.exports = Purport = () => {
     let originalRequire = Module.prototype.require
 
     Module.prototype.require = function (lib){
-        libs[lib] = { ...originalRequire(lib)}
-        _libs[lib] = { ...libs[lib] }
-        Purport[lib] = buildFuncs(lib)
+        if (_libs[lib] === undefined || _libs[lib] === null){
+            libs[lib] = { ...originalRequire(lib)}
+            _libs[lib] = { ...libs[lib] }
+            Purport[lib] = buildFuncs(lib)
+        }
         return _libs[lib]
     }
 
     const buildFuncs = (lib) => {
         let self = {
-            mock: (func, repl) => {
+            callCount: {},
+            eventHandlers: {},
+            wasCalled: {},
+            mock: (func, repl, eventHandlers) => {
                 self[func] = []
+                self.callCount[func] = 0
+                self.wasCalled[func] = () => (self.callCount[func] > 0)
+                self.eventHandlers[func] = { preHook: ()=>{}, postHook: ()=>{}, ...eventHandlers }
                 _libs[lib][func] = (...args) => {
                     self[func].push([...args])
-                    return repl()
+                    self.callCount[func] += 1
+                    self.eventHandlers[func].preHook()
+                    const returnVal = repl()
+                    self.eventHandlers[func].postHook()
+                    return returnVal
                 }
             },
             stub: (func, repl) => {
