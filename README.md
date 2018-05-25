@@ -23,13 +23,13 @@ Purport.yourModule.stub('testAsync', async () => { ... })
 Purport.yourModule.stub('testPromise', new Promise( ... ))
 ```
 
-### watch(methodName)
+### record(methodName)
 #### Observe the inputs/outputs of existing functions
 ##### Exposes properties:
 ###### Purport.yourModule.callCount.yourFunc - number of times the method was called
 ###### Purport.yourModule.wasCalled.yourFunc() - true if the method has been called at least once
 ```
-Purport.yourModule.watch('someFunc')
+Purport.yourModule.record('someFunc')
 Purport.yourModule.callCount.someFunc // 0
 Purport.yourModule.wasCalled.someFunc() // false
 
@@ -44,7 +44,7 @@ Purport.yourModule.wasCalled.someFunc() // true
 ### mock()
 TODO: document me plz ;(
 
-    Mocked functions also expose additional data:
+> Mocked functions also expose additional data:
     
 ### reset()
 Call to reset your module to default
