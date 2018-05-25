@@ -12,6 +12,14 @@ const module = require("yourModule")
 ***
 
 ## Methods
+
+- [stub(methodName, cb)](#stubmethodname-cb)
+- [record(methodName)](#recordmethodname)
+- [mock(methodName, cb, events)](#mockmethodname-cb-hooks)
+- [reset()](#reset)
+
+***
+
 ### stub(methodName, cb)
 #### For when you just want to replace an existing function
 ###### methodName: String value with the exact name of your function *(ex: function test()=>{} would be 'test')*
@@ -50,11 +58,11 @@ Purport.yourModule.wasCalled.someFunc() // true
 > TODO: async/promises? not tested/described ;(
 ***
 
-### mock(*methodName* (String), *cb* () => {...}, *hooks* { preHook: ()=>{}, postHook: ()=>{} })
+### mock(methodName, cb, hooks)
 #### For when simpler method stubs just won't do. Extends stub & record with additional event hooks
 ###### methodName: String value with the exact name of your function *(ex: function test()=>{} would be 'test')*
 ###### cb: The actual method to execute; can use async/await, promises, or the original method *(ex: () => { return true })*
-###### hooks: Optional events to fire directly before and after the function executes
+###### hooks: Optional events to fire directly before and after the function executes formatted like this: `{ preHook: ()=>{}, postHook: ()=>{} }`
 #####
 ##### Exposes properties:
 ###### -Purport.yourModule.args.yourFunc - *An array of argument arrays in the same order as the function was called*
