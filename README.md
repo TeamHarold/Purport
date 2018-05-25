@@ -6,21 +6,24 @@ const Purport = require("purport")()
 const module = require("yourModule")
 ```
 
-##Methods
-###Stub(methodName, func () => { ... } )
+## Methods
+### Stub(methodName, () => { ... } )
+#### For when you just want to replace an existing function
 Call to override your required libraries method with a stub function
 ```
-Purport.yourModule.stub('testFunction', () => true)
+Purport.yourModule.stub('testFunction', () => true) //replaces yourModule.testFunction
 console.log(yourModule.testFunction()) //true
+
+//also works with async/promises
+Purport.yourModule.stub('testAsync', async () => { ... })
+Purport.yourModule.stub('testPromise', new Promise( ... ))
 ```
 
-##Methods
-###Mock()
-TODO: document ;(
+### Mock()
+TODO: document me plz ;(
     
-##Methods
-###Reset()
-Call to reset your module to the default
+### Reset()
+Call to reset your module to default
 ```
 yourModule.falseFunction() //returns false
 Purport.yourModule.stub('testFunction', () => true)
