@@ -1,13 +1,21 @@
 # Purport
 > **__verb__**: *appear or claim to be or do something, especially falsely; profess.*
-### Zero Dependency NodeJS *require()* Mocking
+### Zero Dependency NodeJS *require()* Mocking For Unit Testing
 
 ***
 
 Overrides standard requires() - just require & fire Purport before your other dependencies
 ```javascript
 const Purport = require("purport")()
-const module = require("yourModule")
+const yourModule = require("yourModule")
+const localImport = require("./example")
+
+//Access your module like normal
+yourModule.yourFunc()
+
+//Your module is referenced via Purport as the string passed into require()
+Purport.yourModule.stub("yourFunc", console.log)
+Purport['./example'].record(console.log)
 ```
 ***
 
@@ -89,7 +97,7 @@ Purport.yourModule.wasCalled.thatFunction() // true
 #### Call to reset your module to default
 ```javascript
 yourModule.falseFunction() //returns false
-Purport.yourModule.stub('testFunction', () => true)
+Purport.yourModule.stub('falseFunction', () => true)
 yourModule.falseFunction() //returns true
 
 Purport.yourModule.reset()

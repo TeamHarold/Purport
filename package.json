@@ -1,12 +1,15 @@
 {
   "name": "purport",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "zero dependency NodeJS require mocking for tests",
   "main": "index.js",
   "scripts": {
     "test": "node tests.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teamharold/purport.git"
+  },
   "author": "",
-  "license": "MIT",
-  "Sample": "./sample.js"
+  "license": "MIT"
 }
